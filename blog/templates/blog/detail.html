@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+{% load static %}
+{% load blog_tags %}
+<html lang="zh-cn">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="referrer" content="never">
+	<meta name="description" content="很多人私信求博皮，索性就重构了代码，分享了出来。代码托管至GitHub上，方便大家使用和修改。">
+	<meta property="og:description" content="很多人私信求博皮，索性就重构了代码，分享了出来。代码托管至GitHub上，方便大家使用和修改。">
+	<meta http-equiv="Cache-Control" content="no-transform">
+	<meta http-equiv="Cache-Control" content="no-siteapp">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>文章</title>
+	<link id="favicon" rel="shortcut icon" href="https://blog.dbnuo.com/images/favicon-32x32-next.png"
+		type="image/svg+xml">
+	<!-- 主体字体相关 -->
+	<style>
+		:not(.cnblogs_code):not(.cnblogs_Highlighter)>pre:not([class*="language-"]):not([highlighted]):not(.hljs) {
+			background: rgb(243, 243, 243);
+			padding: 10px;
+			border: 0px none rgb(68, 68, 68);
+			border-radius: 0px 0px 4px 4px;
+			border-color: transparent;
+			color: rgb(68, 68, 68);
+			font-family: "Source Code Pro", Consolas, Menlo, Monaco, "Courier New", monospace;
+		}
+
+		:not(.cnblogs_code):not(.cnblogs_Highlighter)>pre:not([highlighted]) code:not(.hljs) {
+			background: rgb(243, 243, 243) !important;
+			border-color: transparent !important;
+		}
+	</style>
+	<!-- css 分别为common，skin，mobile-skin -->
+	<link rel="stylesheet" href="{% static 'css/blog-common.min.css' %}">
+	<link type="text/css" rel="stylesheet" href="{% static 'Cnblogs-Theme-SimpleMemory-2.1.0/dist/simpleMemory.css' %}">
+	<link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet"
+		href="{% static 'skins/SimpleMemory/bundle-SimpleMemory-mobile.min.css' %}">
+	<!-- js 分别为Google流量分析工具，jquery,common,skin -->
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+	<script src="{% static 'js/blog-common.min.js' %}"></script>
+	<script src="{% static 'Cnblogs-Theme-SimpleMemory-2.1.0/dist/simpleMemory.js' %}" defer></script>
+	<style type="text/css">
+		.medium-zoom-overlay {
+			position: fixed;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			opacity: 0;
+			transition: opacity .3s;
+			will-change: opacity
+		}
+
+		.medium-zoom--opened .medium-zoom-overlay {
+			cursor: pointer;
+			cursor: zoom-out;
+			opacity: 1
+		}
+
+		.medium-zoom-image {
+			cursor: pointer;
+			cursor: zoom-in;
+			transition: transform .3s cubic-bezier(.2, 0, .2, 1) !important
+		}
+
+		.medium-zoom-image--hidden {
+			visibility: hidden
+		}
+
+		.medium-zoom-image--opened {
+			position: relative;
+			cursor: pointer;
+			cursor: zoom-out;
+			will-change: transform
+		}
+	</style>
+	<link id="highlighter-theme-cnblogs" rel="stylesheet" data-loaded="true"
+        href="{% static 'css/hljs/cnblogs.css' %}">
+	<script id="hljs-script" async="" data-loaded="true"
+		src="https://common.cnblogs.com/highlight/11.4.0/highlight.min.js"></script>
+	<!-- 几个控件 -->
+	<link rel="stylesheet" type="text/css"
+		href="{% static 'Cnblogs-Theme-SimpleMemory-2.1.0/dist/style/comBefore.b054622b.css' %}">
+	<link rel="stylesheet" type="text/css"
+        href="{% static 'Cnblogs-Theme-SimpleMemory-2.1.0/dist/style/fonticon.b054622b.css' %}">
+	<link rel="stylesheet" type="text/css"
+		href="{% static 'Cnblogs-Theme-SimpleMemory-2.1.0/dist/style/google-fonts.b054622b.css' %}">
+	<link rel="stylesheet" type="text/css"
+		href="{% static 'Cnblogs-Theme-SimpleMemory-2.1.0/dist/style/particles.b054622b.css' %}">
+	<script src="https://securepubads.g.doubleclick.net/gpt/pubads_impl_2022021701.js?cb=31064998" async="">
+	</script>
+	<link rel="preload" href="https://adservice.google.com/adsid/integrator.js?domain=www.cnblogs.com" as="script">
+	<script type="text/javascript" src="https://adservice.google.com/adsid/integrator.js?domain=www.cnblogs.com">
+	</script>
+	
+</head>
+
+<body class="skin-simplememory no-navbar" data-bs-spy="scroll" data-bs-target="#articleDirectory" data-bs-offset="0"
+	tabindex="0" style="overflow: auto;">
+	<div id="home" style="margin-top: 317px;">
+		<div id="main">
+			<div id="mainContent">
+				<div class="forFlow">
+					<div id="post_detail">
+						<!--done-->
+						<div id="topics">
+							<div class="post">
+								<h1 class="postTitle">
+									<a id="cb_post_title_url"
+										class="postTitle2 vertical-middle post-del-title">
+										<span>{{ article.title }}</span>
+									</a><button class="cnblogs-toc-button"
+										title="显示目录导航"
+										aria-expanded="false">目录</button>
+
+								</h1>
+								<div class="clear"></div>
+								<div class="postBody">
+									<div id="cnblogs_post_description"
+										style="display: none">
+									    {{ article.intro }}
+									</div>
+									<div id="cnblogs_post_body"
+										class="blogpost-body">
+                                        {{ article.body | safe }}
+									</div>
+									<div class="clear"></div>
+								</div>
+                                <div class="clear"></div>
+                                <div id="post_next_prev">
+                                    {% if article.id != 1 %}
+                                    <a href="{% url "blog:detail" article.id  %}">上一篇：{{ article.title }}</a>
+                                    {% endif %}
+                                    <a href="{% url "blog:detail" article.id  %}" style="float: right">下一篇：{{ article.title }}</a>
+                                </div>
+							</div>
+						</div>
+						<!--end: topics 文章、评论容器-->
+					</div>
+                    <section class="comment-area" id="comment-area">
+                    <hr>
+                    <h3>发表评论</h3>
+                    <form action="{% url 'blog:comment_add' article.id %}" method="POST" class="comment-form">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="{{ form.text.id_for_label }}">评论信息</label>
+                            {{ form.text }}
+                            <button type="submit" class="comment-btn">发表</button>
+                        </div>
+                    </div>    <!-- row -->
+                    </form>
+                    <div class="comment-list-panel">
+                        <h3>评论列表，共 <span>{{ comments.count }}</span> 条评论</h3>
+                        <ul class="comment-list list-unstyled">
+                            {% for comment in comments %}
+                            <li class="comment-item">
+                                <span class="nickname">{{ comment.user }}</span>
+                                <time class="submit-date"
+                                      datetime="{{ comment.pub_time }}">
+                                    {{ comment.pub_time }}</time>
+                                <div class="text">
+                                    {{ comment.text }}
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </section>
+				</div>
+				<!--end: forFlow -->
+			</div>
+			<!--end: mainContent 主体内容容器-->
+			<div id="sideBar">
+				<div id="sideBarMain">
+					<div id="sidebar_news" class="newsItem">
+                        <h3 class="catListTitle">公告</h3>
+						<div id="blog-news">
+							<!-- 看不懂 -->
+							<script type="text/javascript">
+								window['__document_write_ajax_callbacks__']['5']();
+							</script>
+							<script type="text/javascript">
+								window['__document_write_ajax_callbacks__']['1']();
+							</script>
+							<script type="text/javascript">
+								window['__document_write_ajax_callbacks__']['6']();
+							</script>
+							<script type="text/javascript">
+								window['__document_write_ajax_callbacks__']['7']();
+							</script>
+							<script defer="">
+								window['__document_write_ajax_callbacks__']['2']();
+							</script>
+							<!-- <div style="display: none" id="__document_write_ajax_div-3"></div><script  defer>window['__document_write_ajax_callbacks__']['3']();</script> -->
+							<div id="profile_block">
+								<a href="/">
+									jungle
+								</a>
+								<br>
+								<script type="text/javascript">
+									window['__document_write_ajax_callbacks__']['8']();
+								</script>
+								<script>
+									window['__document_write_ajax_callbacks__']['4']();
+								</script>
+							</div>
+						</div>
+					</div>
+					<div id="sidebar_c3"></div>
+					<script>
+						loadBlogDefaultCalendar();
+					</script>
+					<div id="leftcontentcontainer">
+						<div id="blog-sidecolumn">
+							<!-- 搜索 -->
+							<div id="sidebar_search" class="sidebar-block">
+								<div id="sidebar_search" class="mySearch">
+									<div id="sidebar_search_box">
+									</div>
+								</div>
+							</div>
+
+							<!-- 分类 -->
+							<div id="sidebar_scorerank" class="sidebar-block">
+								<div class="catListBlogRank">
+                                    {% get_category as categories %}
+                                    <ul>
+                                        {% for category in categories %}
+                                            <li>
+                                                <a href="{% url "blog:category"  category.id %}">
+                                                    {{ category.name }} <span class="post-count">({{ category.num_posts }})</span></a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+								</div>
+							</div>
+
+							<!-- 标签 -->
+							<div id="sidebar_toptags" class="sidebar-block">
+								<div class="catListTag">
+                                    {% get_tag as tags %}
+                                    <ul>
+                                        {% for tag in tags %}
+                                            <li>
+                                                <a href="{% url "blog:tag" tag.id %}">
+                                                    {{ tag.name }}({{ tag.num_posts }})</a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+								</div>
+							</div>
+
+							<!-- 归档 -->
+							<div id="sidebar_recentposts" class="sidebar-block">
+								<div class="catListEssay">
+									{% archives as dates %}
+                                    <ul>
+                                        {% for date in dates %}
+                                            <li>
+                                                <a href="{% url 'blog:archive' date.year date.month %}">
+                                                    {{ date.year }} 年 {{ date.month }} 月 </a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+								</div>
+							</div>
+						</div>
+						<script>
+							loadBlogSideColumn();
+						</script>
+					</div>
+				</div>
+				<!--end: sideBarMain -->
+			</div>
+			<!--end: sideBar 侧边栏容器 -->
+			<div class="clear"></div>
+		</div>
+		<!--end: main -->
+		<div class="clear"></div>
+		<div id="footer"></div>
+		<!--end: footer -->
+	</div>
+	<!--end: home 自定义的最大容器 -->
+	<div id="page_end_html">
+		<!-- oss -->
+		<script src="https://blog.dbnuo.com/js/lib/ripemd160.js?_=1622711712619"></script>
+		<script src="https://blog.dbnuo.com/js/oss.encode.js?_=1622711712620"></script>
+
+		<!-- require APlayer -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+		<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+		<!-- require MetingJS -->
+		<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+	</div>
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-476124-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+
+		function gtag() {
+			dataLayer.push(arguments);
+		}
+		gtag('js', new Date());
+		var kv = getGACustom();
+		if (kv) {
+			gtag('set', kv);
+		}
+		gtag('config', 'UA-476124-1');
+	</script>
+	<script defer="" src="https://hm.baidu.com/hm.js?866c9be12d4a814454792b1fd0fed295"></script>
+	<script type="text/javascript">
+		window.cnblogsConfig = {
+			info: {
+				name: 'J',
+				startDate: '2016-11-17',
+				avatar: '{% static 'images/xixi.gif' %}',
+				blogIcon: 'https://blog.dbnuo.com/images/favicon-32x32-next.png'
+			},
+			sidebar: {
+				navList: [
+					['友链', 'https://www.baidu.com', 'icon-pengyoufill'],
+					['Blog', 'https://errorworld.cn/blog', 'icon-blog-solid'],
+					['GitHub', 'https://github.com/errorworld2000', 'icon-github'],
+				],
+			},
+			switchDayNight: {
+				enable: true,
+				nightMode: false,
+				auto: {
+					enable: false,
+					dayHour: 5,
+					nightHour: 19
+				}
+			},
+			banner: {
+				home: {
+					background: [
+                        '{% static 'images/1.jpg' %}',
+					],
+					title: [],
+					titleSource: 'one',
+				},
+				article: {
+					background: [
+					    '{% static 'images/1.jpg' %}',
+					],
+				}
+			},
+			links: {},
+			articleSuffix: {
+				imgUrl: '',
+			},
+			footer: {
+				text: {
+					left: '它并不是我的花',
+					right: '我只是途经了它的盛放',
+				},
+				style: 2
+			},
+			cnzz: '1274152299',
+			rtMenu: {
+				qrCode: '',
+				reward: {
+					alipay: '',
+					wechatpay: ''
+				},
+				downScrollDom: '#blog_post_info_block',
+			},
+			code: {
+				type: 'hljs',
+				options: {
+					hljs: {
+						theme: 'atom-one-dark-reasonable',
+						languages: ['Bash', 'CSS', 'Dockerfile', 'Go', 'HTML', 'XML', 'HTTP', 'Less',
+							'Lua', 'PHP', 'Python', 'Shell', 'SQL', 'Java', 'JSON'
+						]
+					},
+					maxHeight: '',
+					line: true,
+					macStyle: true,
+				},
+			},
+			articleDirectory: {
+				position: 'right',
+				minBodyWeight: 900
+			},
+			animate: {
+				bannerImages: {
+					enable: false,
+					options: {
+						itemNum: 5,
+						current: -1,
+						sort: 1,
+						time: 30000
+					}
+				},
+				homeBanner: {
+					enable: false,
+					options: {
+						radius: 15,
+						density: 0.2,
+						color: 'rgba(255,255,255, .2)',
+						clearOffset: 0.3
+					}
+				},
+				articleTitle: {
+					enable: true
+				},
+				articleBanner: {
+					enable: false
+				},
+				background: {
+					enable: false,
+					options: {
+						colorSaturation: "60%",
+						colorBrightness: "50%",
+						colorAlpha: 0.5,
+						colorCycleSpeed: 5,
+						verticalPosition: "random",
+						horizontalSpeed: 200,
+						ribbonCount: 3,
+						strokeSize: 0,
+						parallaxAmount: -0.2,
+						animateSections: true
+					}
+				},
+				backgroundMouse: {
+					enable: true
+				},
+				mouse: {
+					enable: false,
+					options: {
+						size: 8,
+						sizeF: 36
+					}
+				}
+			},
+			consoleList: [],
+		}
+
+		window.cnblogsConfig.links.footer = [
+			["百度", 'https://www.bing.com'],
+
+		];
+
+		window.cnblogsConfig.hooks = {
+			beforeCode: (_) => {
+				// console.log('code 渲染开始前');
+			},
+			afterCode: (_) => {
+				// console.log('code 渲染结束后');
+			},
+			beforeLoading: (_) => {
+				// console.log('loading 开始前');
+			},
+			afterLoading: (_) => {
+				// console.log('loading 结束后');
+			},
+			dayNightControl: (_, type) => {
+				// console.log(type);
+				// console.log('日/夜间模式');
+			},
+		}
+	</script>
+	<iframe
+		src="https://ebbb7a5534d0b02dee921d53f9610007.safeframe.googlesyndication.com/safeframe/1-0-38/html/container.html"
+		style="visibility: hidden; display: none;"></iframe>
+	<script type="text/javascript">
+		getFollowStatus('61118ff5-a5ac-e611-845c-ac853d9f53ac');
+	</script>
+    <iframe src="https://www.google.com/recaptcha/api2/aframe" width="0" height="0"
+		style="display: none;"></iframe>
+</body>
+
+</html>

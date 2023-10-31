@@ -1,0 +1,108 @@
+{% extends 'backend/base.html' %}
+
+    {% block link %}
+        <!-- Bootstrap Markdown -->
+   <link rel="stylesheet" href="/static/assets/backend/vendor_components/bootstrap-markdown-master/css/bootstrap-markdown.css">
+
+    {% endblock %}
+
+   {% block content %}
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        写文章
+      </h1>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">我的博客后台</a></li>
+        <li class="breadcrumb-item active">写文章</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+      <div class="row">
+
+          <div  class="col-lg-12">
+             <form action="/backend/write_article/" method="post">
+            <div class="box">
+               <div class="box-header with-border">
+                 <input name="title" type="text" class="form-control" placeholder="输入标题">
+               </div>
+               <!-- /.box-header -->
+               <div style="height: auto"  class="box-body">
+
+                  <div class="example">
+                    <textarea style="height: 500px" name="content" data-provide="markdown" data-iconlibrary="fa"></textarea>
+
+                  </div>
+
+                </div>
+               <!-- /.box-body -->
+             </div>
+
+                <div class="box">
+                    <div class="box-header with-border">
+                 <h3 class="box-title">选择类别</h3>
+               </div>
+               <!-- /.box-header -->
+               <div style="height: auto"  class="box-body">
+                        <div class="form-group validate">
+                        <h5>选择分类 <span class="text-danger">*</span></h5>
+                        <div class="controls">
+                                    {% for type in all_type %}
+                           <fieldset>
+                              <label class="custom-control custom-checkbox">
+                                 <input type="checkbox" value="{{ type.id }}" name="article_type"  class="custom-control-input" aria-invalid="false"> <span class="custom-control-indicator"></span> <span class="custom-control-description">{{ type.name }}</span> </label>
+                           </fieldset>
+                           {% endfor %}
+
+                        </div>
+
+                </div>
+                    <button id="submit" type="submit" class="btn btn-info margin-top-10">提交</button>
+                            {% csrf_token %}
+                 </div>
+             </form>
+              <!-- /.box -->
+          </div>
+
+      </div>
+
+   </section>
+   <!-- /.content -->
+  </div>
+
+
+{% endblock %}
+
+{% block script %}
+    <script>
+        $('#write_article').addClass('active')
+ $('#submit').click(function () {
+    var cbs = document.getElementsByName("article_type");
+   var checkNum = 0;
+   for (var i = 0; i < cbs.length; i++) {
+    if (cbs[i].checked) {
+        checkNum++;
+    }
+   }
+   if (checkNum == 0) {
+        alert('至少选择一个类别');
+        return false;
+    }
+
+ })
+
+    </script>
+
+   <!-- Bootstrap markdown -->
+   <script src="/static/assets/backend/vendor_components/bootstrap-markdown-master/js/bootstrap-markdown.js"></script>
+
+   <!-- marked-->
+   <script src="/static/assets/backend/vendor_components/marked/marked.js"></script>
+
+   <!-- to markdown -->
+   <script src="/static/assets/backend/vendor_components/to-markdown/to-markdown.js"></script>
+{% endblock %}

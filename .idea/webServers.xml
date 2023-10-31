@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="83cbde24-13df-41dd-a197-9c1b0259b4c1" name="errorworld" url="https://errorworld.cn">
+        <fileTransfer rootFolder="/var/www/MyWeb" accessType="SFTP" host="errorworld.cn" port="22" sshConfigId="d7d57a32-7b5e-4cc2-83ab-645127ab623a" sshConfig="ubuntu@errorworld.cn:22 key" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

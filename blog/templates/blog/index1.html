@@ -1,0 +1,61 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}博客首页{% endblock %}
+
+{% block main %}
+    {% for article in articles %}
+        <article class="post post-{{ article.id }}">
+            <header class="entry-header">
+                <h1 class="entry-title">
+                    <a href="../single.html">{{ article.title }}</a>
+                </h1>
+                <div class="entry-meta">
+                    <span class="post-category"><a href="#">{{ article.category }}</a></span>
+                    <span class="post-date"><a href="#"><time class="entry-date"
+                                                              datetime={{ article.pub_time }}>{{ article.pub_time }}</time></a></span>
+                    <span class="post-author"><a href="#">{{ article.user }}</a></span>
+                    <span class="views-count"><a href="#">{{ article.views }} 阅读</a></span>
+                </div>
+            </header>
+            <div class="entry-content clearfix">
+                {% if article.intro %}
+                    <p>{{ article.intro }}</p>
+                {% else %}
+
+                    {#   获取前面字符串的前200个字符;                           #}
+                    <p>{{ article.body |  truncatechars:20 }}</p>
+                {% endif %}
+                <div class="read-more cl-effect-14">
+                    <a href="{{ article.get_url }}" class="more-link">继续阅读 <span class="meta-nav">→</span></a>
+                </div>
+            </div>
+        </article>
+    {% endfor %}
+    <br/>
+    <br/>
+    <br/>
+    <div class="pager">
+        {% if articles.has_previous %}
+            <li><a class="active" href="?page={{ articles.previous_page_number }}">
+                上一页</a></li>
+        {% else %}
+            <li><a class="disabled">上一页</a></li>
+        {% endif %}
+        <span class="current">第 {{ articles.number }} 页 / 共 {{ paginator.num_pages }} 页</span>
+
+        {% if articles.has_next %}
+            <li><a class="active" href="?page={{ articles.next_page_number }}">
+                下一页</a></li>
+        {% else %}
+            <li><a class="disabled">下一页</a></li>
+
+        {% endif %}
+
+
+        <br/>
+
+        {#        具体的分页#}
+
+    </div>
+{% endblock %}
+
